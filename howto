@@ -1,0 +1,5 @@
+how to run: python3 manage.py runserver
+
+start environment: source env/bin/activate
+
+run project: django-admin startproject ___
