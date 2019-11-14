@@ -1,0 +1,23 @@
+{
+  "name": "apcs-django",
+  "version": "1.0.0",
+  "description": "\"This is a description\"",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "scss": "node-sass --watch src/scss/ -o src/static --output-style=compressed"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/MartinPlusPlus/APCS-Django.git"
+  },
+  "author": "Martin Eldredge",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/MartinPlusPlus/APCS-Django/issues"
+  },
+  "homepage": "https://github.com/MartinPlusPlus/APCS-Django#readme",
+  "devDependencies": {
+    "node-sass": "^4.13.0"
+  }
+}

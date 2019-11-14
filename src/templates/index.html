@@ -1,5 +1,17 @@
 {% extends 'base.html' %}
 {% block content %}
-    <h1>Homepage</h1>
+    <h1>Generic Blog</h1>
     <a href="{% url 'about' %}">About</a>
+
+    {% include "post.html" %}
+    {% include "post.html" %}
+    {% include "post.html" %}
+    {% include "post.html" %}
+
+    <form class="comment-area" action="{% url 'add_comment' %}" method="post">
+        <textarea name="comment" rows="4" cols="80" placeholder="Comment Here" maxlength="500"></textarea>
+        <input type="text" name="name" value="" placeholder="Name Here">
+        <button type="submit">Comment</button>
+    </form>
+
 {% endblock content %}
