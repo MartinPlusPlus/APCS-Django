@@ -1,17 +1,25 @@
 {% extends 'base.html' %}
 {% block content %}
-    <h1>Generic Blog</h1>
-    <a href="{% url 'about' %}">About</a>
+    <div class="ml-5">
+        <h1 class="display-2">Generic Blog</h1>
+        <a class="h1" href="{% url 'about' %}">About</a>
+    </div>
 
     {% include "post.html" %}
-    {% include "post.html" %}
-    {% include "post.html" %}
-    {% include "post.html" %}
+    <ul class="container list-unstyled">
+        {% for comment in comments %}
+            <li class="d-flex flex-row justify-conent-start align-items-center comment">
+                <div class="placeholder-blue"><b>{{comment.name}}</b></div>
+                <p>{{comment.comment}}</p>
+            </li>
+        {% endfor %}
+    </ul>
 
-    <form class="comment-area" action="{% url 'add_comment' %}" method="post">
-        <textarea name="comment" rows="4" cols="80" placeholder="Comment Here" maxlength="500"></textarea>
+    <form class="comment-area d-flex flex-direction-row" action="{% url 'index' %}" method="post">
+        {% csrf_token %}
         <input type="text" name="name" value="" placeholder="Name Here">
-        <button type="submit">Comment</button>
+        <textarea name="comment" rows="4" cols="80" placeholder="Comment Here" maxlength="500"></textarea>
+        <button type="submit" class="btn btn-primary">Comment</button>
     </form>
 
 {% endblock content %}

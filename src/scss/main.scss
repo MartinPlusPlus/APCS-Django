@@ -7,6 +7,16 @@
     padding: 0;
 }
 
+div.placeholder-blue {
+    width: 75px;
+    height: 75px;
+    color: black;
+    background-color: blue;
+    text-align: center;
+    //margin-left: 10%;
+}
+
+/*
 h1, h2, h3, h4, h5, h6 {
     padding: 2%;
 }
@@ -42,14 +52,18 @@ textarea {
     resize: none;
 }
 
-div.comment-area button {
-    height: 100%;
+
+.comment-area {
+    display: flex;
+    flex-direction: row;
 }
 
-div.comment {
+.comment {
     display: flex;
     flex-direction: row;
     justify-content: flex-start;
     margin-top: 50px;
     margin-bottom: 50px;
+    margin-left: 20%;
 }
+*/

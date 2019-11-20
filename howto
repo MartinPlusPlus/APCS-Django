@@ -6,4 +6,6 @@ run project: django-admin startproject ___
 
 how to run an app: python3 manage.py startapp <appname>
 
-how to migrate db: python3 manage.py makemigrations 
+how to migrate db: python3 manage.py makemigrations
+
+how to add tables to db: python3 manage.py migrate 
