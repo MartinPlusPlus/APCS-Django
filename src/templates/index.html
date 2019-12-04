@@ -6,7 +6,6 @@
         <a class="h1" href="{% url 'about' %}">About</a>
     </div>
 
-    {% include "post.html" %}
     <ul class="container list-unstyled">
         {% for comment in comments %}
             <li class="d-flex flex-row justify-conent-start align-items-center comment">
@@ -15,6 +14,15 @@
             </li>
         {% endfor %}
     </ul>
+
+    <div class="card container">
+        <div class="card-body">
+            <h1 class="card-title float-center">{{post.title}}</h1>
+            <h2 class="card-subtitle mb-2 text-muted">{{post.subtitle}}</h2>
+            <h5 class="mb-5">Made by: {{post.author}}</h3>
+            <p class="card-text">{{post.text}}</p>
+        </div>
+    </div>
 
     <form class="comment-area d-flex flex-direction-row" action="{% url 'add_comment' %}" method="post">
         {% csrf_token %}

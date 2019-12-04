@@ -8,4 +8,10 @@ how to run an app: python3 manage.py startapp <appname>
 
 how to migrate db: python3 manage.py makemigrations
 
-how to add tables to db: python3 manage.py migrate 
+how to add tables to db: python3 manage.py migrate
+
+how to view all installed pip apps: pip list
+
+how to output dependencies: pip freeze > <filename>
+
+how to install dependancies: pip install -r <filename> 

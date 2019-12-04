@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect
 from rest_framework import status
 from rest_framework.decorators import api_view
-from .models import Comment
+from .models import Comment, Post
 from .forms import CommentForm
 from .serializers import CommentSerializer
 import pytz
@@ -34,6 +34,9 @@ def add_comment(request):
 
 # Display the comments
 def blog_post(request):
+
+  post = Post.objects.filter(id=1)[:1].get()
+
   form = CommentForm()
   form_errors = {}
   try:
@@ -45,7 +48,7 @@ def blog_post(request):
     pass
 
   # Get all the comments
-  db_comments = Comment.objects.all()
+  db_comments = Comment.objects.filter(_post=1)
   comments = []
   # Just send the day of the comment, not the time
   for comment in db_comments.reverse():
@@ -59,6 +62,7 @@ def blog_post(request):
   return render(request,
                 template_name="index.html",
                 context={
+                  'post': post,
                   'comments': comments,
                   'errors': form_errors.values(),
                   'form': form,
