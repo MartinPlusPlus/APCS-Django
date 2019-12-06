@@ -15,14 +15,16 @@
         {% endfor %}
     </ul>
 
+    {% for p in post %}
     <div class="card container">
         <div class="card-body">
-            <h1 class="card-title float-center">{{post.title}}</h1>
-            <h2 class="card-subtitle mb-2 text-muted">{{post.subtitle}}</h2>
-            <h5 class="mb-5">Made by: {{post.author}}</h5>
-            <p class="card-text">{{post.text}}</p>
+            <h1 class="card-title float-center">{{p.title}}</h1>
+            <h2 class="card-subtitle mb-2 text-muted">{{p.subtitle}}</h2>
+            <h5 class="mb-5">Made by: {{p.author}}</h5>
+            <p class="card-text">{{p.text}}</p>
         </div>
     </div>
+    {% endfor %}
 
     <form class="comment-area d-flex flex-direction-row" action="{% url 'add_comment' %}" method="post">
         {% csrf_token %}

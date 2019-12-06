@@ -35,7 +35,8 @@ def add_comment(request):
 # Display the comments
 def blog_post(request):
 
-  post = Post.objects.filter(id=1)[:1].get()
+  #post = Post.objects.filter(id=1)[:1].get()
+  post = Post.objects.all()
 
   form = CommentForm()
   form_errors = {}
@@ -68,3 +69,24 @@ def blog_post(request):
                   'form': form,
                   'num_comments': len(comments)
                 })
+
+def display_post(request, postID):
+    post = Post.objects.filter(id=postID)
+
+    # Get all the comments
+    db_comments = Comment.objects.filter(_post=1)
+    comments = []
+    # Just send the day of the comment, not the time
+    for comment in db_comments.reverse():
+        comments.append({
+          'name': comment.name,
+          'comment': comment.comment,
+          'created': comment.created.date()
+        })
+
+    return render(request, template_name="post.html", context={
+                                                        'post': post,
+                                                        'postID': postID,
+                                                        'comments': comments,
+                                                        'num_comments': len(comments)
+                                                        })
