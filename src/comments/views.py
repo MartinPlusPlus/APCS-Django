@@ -8,7 +8,7 @@ import pytz
 
 # Django Rest Framework for seeing the JSON
 @api_view(['POST'])
-def add_comment(request):
+def add_comment(request, postID):
 
   # Create a form instance and populate it with data from the request:
   form = CommentForm(request.POST)
@@ -30,51 +30,62 @@ def add_comment(request):
     # Cache the errors
     request.session["comment_errors"] = comment_errors
 
-  return redirect('/')
+  return redirect('/post/' + postID)
 
 # Display the comments
 def blog_post(request):
 
-  #post = Post.objects.filter(id=1)[:1].get()
-  post = Post.objects.all()
+    #post = Post.objects.filter(id=1)[:1].get()
+    post = Post.objects.all()
 
-  form = CommentForm()
-  form_errors = {}
-  try:
-    # Get comment errors if any from cache
-    form_errors = request.session["comment_errors"]
-    # Clear comment errors
-    request.session["comment_errors"] = {}
-  except KeyError:
-    pass
+    form = CommentForm()
+    form_errors = {}
+    try:
+        # Get comment errors if any from cache
+        form_errors = request.session["comment_errors"]
+        # Clear comment errors
+        request.session["comment_errors"] = {}
+    except KeyError:
+        pass
 
-  # Get all the comments
-  db_comments = Comment.objects.filter(_post=1)
-  comments = []
-  # Just send the day of the comment, not the time
-  for comment in db_comments.reverse():
-      comments.append({
+    # Get all the comments
+    db_comments = Comment.objects.filter(_post=1)
+    comments = []
+    # Just send the day of the comment, not the time
+    for comment in db_comments.reverse():
+        comments.append({
         'name': comment.name,
         'comment': comment.comment,
         'created': comment.created.date()
-      })
+    })
 
-  # Render the html for the post
-  return render(request,
-                template_name="index.html",
-                context={
-                  'post': post,
-                  'comments': comments,
-                  'errors': form_errors.values(),
-                  'form': form,
-                  'num_comments': len(comments)
-                })
+    # Render the html for the post
+    return render(request,
+                        template_name="index.html",
+                        context={
+                        'post': post,
+                        'comments': comments,
+                        'errors': form_errors.values(),
+                        'form': form,
+                        'num_comments': len(comments)
+                    })
+
 
 def display_post(request, postID):
     post = Post.objects.filter(id=postID)
 
+    form = CommentForm()
+    form_errors = {}
+    try:
+        # Get comment errors if any from cache
+        form_errors = request.session["comment_errors"]
+        # Clear comment errors
+        request.session["comment_errors"] = {}
+    except KeyError:
+        pass
+
     # Get all the comments
-    db_comments = Comment.objects.filter(_post=1)
+    db_comments = Comment.objects.filter(_post=postID)
     comments = []
     # Just send the day of the comment, not the time
     for comment in db_comments.reverse():
@@ -88,5 +99,7 @@ def display_post(request, postID):
                                                         'post': post,
                                                         'postID': postID,
                                                         'comments': comments,
+                                                        'errors': form_errors.values(),
+                                                        'form': form,
                                                         'num_comments': len(comments)
                                                         })

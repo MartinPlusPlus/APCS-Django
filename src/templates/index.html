@@ -19,6 +19,7 @@
     <div class="card container">
         <div class="card-body">
             <h1 class="card-title float-center">{{p.title}}</h1>
+            <a href="{% url 'display_post' %}"></a>
             <h2 class="card-subtitle mb-2 text-muted">{{p.subtitle}}</h2>
             <h5 class="mb-5">Made by: {{p.author}}</h5>
             <p class="card-text">{{p.text}}</p>

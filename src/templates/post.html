@@ -10,5 +10,24 @@
         <p class="card-text">{{p.text}}</p>
     </div>
 </div>
+
+<ul class="container list-unstyled">
+    {% for comment in comments %}
+        <li class="d-flex flex-row justify-conent-start align-items-center comment">
+            <div class="placeholder-blue"><b>{{comment.name}}</b></div>
+            <p>{{comment.comment}}</p>
+        </li>
+    {% endfor %}
+</ul>
+
+<form class="comment-area d-flex flex-direction-row" action="{% url 'add_comment' %}" method="post">
+    {% csrf_token %}
+    {{form}}
+    <button type="submit" class="btn btn-primary">Comment</button>
+</form>
 {% endfor %}
 {% endblock content %}
+
+{% block scripts %}
+<script src="{% static 'js/style-form.js' %}""></script>
+{% endblock %}
